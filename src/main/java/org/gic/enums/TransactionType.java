@@ -1,4 +1,4 @@
-package org.gic.model;
+package org.gic.enums;
 
 import org.gic.constants.TransactionTypeConstants;
 

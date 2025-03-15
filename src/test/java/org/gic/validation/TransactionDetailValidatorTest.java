@@ -1,7 +1,7 @@
 package org.gic.validation;
 
 import org.gic.model.TransactionDetail;
-import org.gic.model.TransactionType;
+import org.gic.enums.TransactionType;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionDetailValidatorTest {
-    private final TransactionDetailValidator transactionDetailValidator = new TransactionDetailValidator();
 
     @Test
     void testDateFormatWithValid() {
@@ -19,7 +18,7 @@ class TransactionDetailValidatorTest {
                 new BigDecimal("100"), "122222", 'D');
 
         //Act & Assert
-        assertDoesNotThrow(() -> transactionDetailValidator.validate(transactionDetail));
+        assertDoesNotThrow(() -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -30,7 +29,7 @@ class TransactionDetailValidatorTest {
                 new BigDecimal("100"), "122222", 'D');
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> transactionDetailValidator.validate(transactionDetail));
+        assertThrows(IllegalArgumentException.class, () -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -41,7 +40,7 @@ class TransactionDetailValidatorTest {
                 new BigDecimal("100"), "122222", 'D');
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> transactionDetailValidator.validate(transactionDetail));
+        assertThrows(IllegalArgumentException.class, () -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -52,7 +51,7 @@ class TransactionDetailValidatorTest {
                 new BigDecimal("100"), "122222", 'D');
 
         //Act & Assert
-        assertDoesNotThrow(() -> transactionDetailValidator.validate(transactionDetail));
+        assertDoesNotThrow(() -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -63,7 +62,7 @@ class TransactionDetailValidatorTest {
                 new BigDecimal("100"), "122222", 'A');
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> transactionDetailValidator.validate(transactionDetail));
+        assertThrows(IllegalArgumentException.class, () -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -74,7 +73,7 @@ class TransactionDetailValidatorTest {
                 amount, "122222", 'D');
 
         //Act & Assert
-        assertDoesNotThrow(() -> transactionDetailValidator.validate(transactionDetail));
+        assertDoesNotThrow(() -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -85,7 +84,7 @@ class TransactionDetailValidatorTest {
                 amount, "122222", 'D');
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> transactionDetailValidator.validate(transactionDetail));
+        assertThrows(IllegalArgumentException.class, () -> TransactionDetailValidator.validate(transactionDetail));
     }
 
     @Test
@@ -96,7 +95,7 @@ class TransactionDetailValidatorTest {
                 amount, "122222", 'D');
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> transactionDetailValidator.validate(transactionDetail));
+        assertThrows(IllegalArgumentException.class, () -> TransactionDetailValidator.validate(transactionDetail));
     }
 
 

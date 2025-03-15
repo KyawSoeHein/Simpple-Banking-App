@@ -6,5 +6,5 @@ package org.gic.constants;
 //[Q] Quit
 
 public class MessageConstants {
-    public static String GREETING_MESSAGE = "Welcome to AwesomeGIC Bank! What would you like to do?";
+    public static final String GREETING_MESSAGE = "Welcome to AwesomeGIC Bank! What would you like to do?";
 }

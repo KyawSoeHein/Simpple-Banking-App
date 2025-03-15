@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import static org.gic.constants.DateConstants.TRANSACTION_DATE_FORMATTER;
 
 public class TransactionDetailValidator {
-    private boolean isDateFormatValid(TransactionDetail transactionDetail) {
+    private static boolean isDateFormatValid(TransactionDetail transactionDetail) {
         try {
             LocalDate.parse(transactionDetail.transactionDate(), TRANSACTION_DATE_FORMATTER);
             return true;
@@ -18,17 +18,17 @@ public class TransactionDetailValidator {
         }
     }
 
-    private boolean isTransactionTypeValid(TransactionDetail transactionDetail) {
+    private static boolean isTransactionTypeValid(TransactionDetail transactionDetail) {
         return transactionDetail.shortTransactionType() == TransactionTypeConstants.TRANSACTION_TYPE_DEPOSIT ||
                 transactionDetail.shortTransactionType() == TransactionTypeConstants.TRANSACTION_TYPE_WITHDRAW;
     }
 
-    private boolean isAmountValid(TransactionDetail transactionDetail) {
+    private static boolean isAmountValid(TransactionDetail transactionDetail) {
         return transactionDetail.amount().compareTo(BigDecimal.ZERO) > 0 &&
                 transactionDetail.amount().scale() <= 2;
     }
 
-    public void validate(TransactionDetail transactionDetail) throws IllegalArgumentException {
+    public static void validate(TransactionDetail transactionDetail) throws IllegalArgumentException {
         if (!isDateFormatValid(transactionDetail)) {
             throw new IllegalArgumentException("Invalid transaction date format");
         }
