@@ -30,7 +30,8 @@ public class InputOptionReader {
         } catch (BlankInputException blankInputException) {
             return NavigationRoutes.GO_TO_MENU_PAGE;
         } catch (Exception e) {
-            System.out.println("InputOptionReader : Something seems to be wrong here " + e.getMessage());
+            System.out.println("Seems like you input invalid option. Please try again.");
+            System.out.println();
             return NavigationRoutes.GO_TO_MENU_PAGE;
         }
     }

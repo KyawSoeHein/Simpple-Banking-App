@@ -20,7 +20,7 @@ public class Navigator {
             case GO_TO_TRANSACTION_INPUT_PAGE -> InputTransactionPage.showInputTransactionPage();
             case QUIT -> System.exit(0);
             default -> {
-                System.out.println("I don't know this route but let's just go to menu first");
+                System.out.println("I don't know this route but let's just go to menu first " + navigationRoute);
                 MenuPage.showMenuPage();
             }
         }
