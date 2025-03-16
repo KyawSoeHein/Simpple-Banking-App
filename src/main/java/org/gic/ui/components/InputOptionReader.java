@@ -11,7 +11,7 @@ public class InputOptionReader {
         return switch (optionType.toUpperCase()) {
             case MenuConstants.DEFINE_INTEREST_RULES_TYPE -> NavigationRoutes.GO_TO_DEFINE_INTEREST_RULES_PAGE;
             case MenuConstants.INPUT_TRANSACTION_TYPE -> NavigationRoutes.GO_TO_TRANSACTION_INPUT_PAGE;
-            case MenuConstants.PRINT_STATEMENT_TYPE -> NavigationRoutes.GO_TO_ACCOUNT_STATEMENT_PAGE;
+            case MenuConstants.PRINT_STATEMENT_TYPE -> NavigationRoutes.GO_TO_PRINTING_STATEMENT_PAGE;
             case MenuConstants.QUIT_TYPE -> NavigationRoutes.QUIT;
             default -> throw new IllegalStateException("InputOptionReader : Invalid optionType: " + optionType);
         };
