@@ -1,12 +1,14 @@
 package org.gic.singleton;
 
+import org.gic.model.Account;
+
 import java.util.HashMap;
 
 //I am not considering multi threaded scenario
 public class AccountStorage {
-    private static final org.gic.model.AccountStorage instance = new org.gic.model.AccountStorage(new HashMap<>());
+    private static final HashMap<String, Account> accounts = new HashMap<>();
 
-    public static org.gic.model.AccountStorage getInstance() {
-        return instance;
+    public static HashMap<String, Account> getAccountStorage() {
+        return accounts;
     }
 }

@@ -15,6 +15,12 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.7.0'  // Core Mockito
     testImplementation 'org.mockito:mockito-junit-jupiter:5.7.0' // Mockito for JUnit 5
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    compileOnly 'org.projectlombok:lombok:1.18.30' // Use latest version
+    annotationProcessor 'org.projectlombok:lombok:1.18.30' // Required for annotation processing
+
+    // For testing
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {

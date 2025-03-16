@@ -1,7 +1,5 @@
 package org.gic.singleton;
 
-import org.gic.model.AccountStorage;
-
 import java.util.Scanner;
 
 public class TextScanner {
