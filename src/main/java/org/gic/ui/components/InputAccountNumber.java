@@ -6,7 +6,6 @@ import org.gic.singleton.TextScanner;
 
 public class InputAccountNumber {
     public static Account readAccountNumber() throws Exception {
-        System.out.println();
         System.out.print("Enter your account number: ");
         String accountNumberStr = TextScanner.getScanner().nextLine();
         Account account = AccountStorage.getAccountStorage().get(accountNumberStr);
