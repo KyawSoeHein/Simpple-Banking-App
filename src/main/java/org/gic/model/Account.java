@@ -13,7 +13,7 @@ public class Account {
     private String accountNumber;
     private BigDecimal balance;
     private List<TransactionDetail> accountStatementList;
-    private List<InterestRules> appliedInterestRules;
+    private List<InterestRule> appliedInterestRules;
 
     public void addToBalance(BigDecimal balanceToAdd) {
         this.balance = this.balance.add(balanceToAdd);

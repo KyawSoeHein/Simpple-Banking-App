@@ -1,7 +1,11 @@
 package org.gic.validation;
 
-import org.gic.model.InterestRules;
+import org.gic.constants.DateConstants;
+import org.gic.model.InterestRule;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,71 +14,86 @@ class InputInterestRuleValidatorTest {
     @Test
     void testDateFormatWithValid() {
         //Arrange
-        String date= "20250123";
-        InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
+        String interestRule = "20250123 0000 10.00";
 
         //Act & Assert
-        assertDoesNotThrow(() -> InputInterestRuleValidator.validate(interestRules));
+        assertDoesNotThrow(() -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
     void testDateFormatWithInValid() {
         //Arrange
-        String date= "01032025";
-        InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
+        String interestRule = "01032025 0000 10.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
+        assertThrows(DateTimeParseException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
     void testDateFormatWithCorrectFormatButInvalidDate() {
         //Arrange
-        String date= "20250230";
-        InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
+        String interestRule = "20250230 0000 10.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
+        assertThrows(DateTimeParseException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
-    void testInterestRateWithValid() {
+    void testInterestRateWithValidData() {
         //Arrange
-        float interestRate = 10.0f;
-        InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
+        String interestRule = "20250123 0000 10.00";
 
         //Act & Assert
-        assertDoesNotThrow(() -> InputInterestRuleValidator.validate(interestRules));
+        assertDoesNotThrow(() -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
-    void testInterestRateWithInValid() {
+    void testInterestRateWithInValidData() {
         //Arrange
-        float interestRate = -10.0f;
-        InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
+        String interestRule = "20250123 0000 -10.0";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
     void testInterestRateInValidZero() {
         //Arrange
-        float interestRate = 0.0f;
-        InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
+        String interestRule = "20250123 0000 0.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
     @Test
     void testInterestRateInValidHundred() {
         //Arrange
-        float interestRate = 100f;
-        InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
+        String interestRule = "20250123 0000 100";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
+    }
+
+    @Test
+    void testIfCorrectDTOIsReturned() throws Exception {
+        //Arrange
+        InterestRule expected = new InterestRule(LocalDate.parse("20250123", DateConstants.INTEREST_RULE_DATE_FORMATTER), "0000", 10.00f);
+        String interestRule = "20250123 0000 10.00";
+
+        //Act
+        InterestRule actual = InputInterestRuleValidator.validateAndTransform(interestRule);
+
+        //Assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testInterestRateInValidNull() {
+        //Arrange
+        String interestRule = null;
+
+        //Act & Assert
+        assertThrows(NullPointerException.class, () -> InputInterestRuleValidator.validateAndTransform(interestRule));
     }
 
 }

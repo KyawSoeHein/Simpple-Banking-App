@@ -4,7 +4,7 @@ import org.gic.model.Account;
 import org.gic.singleton.AccountStorage;
 import org.gic.singleton.TextScanner;
 
-public class InputAccountNumber {
+public class InputAccountNumberReader {
     public static Account readAccountNumber() throws Exception {
         System.out.print("Enter your account number: ");
         String accountNumberStr = TextScanner.getScanner().nextLine();

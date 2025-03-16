@@ -6,7 +6,7 @@ import org.gic.ui.components.InputTransactionDetailReader;
 import org.gic.ui.navigator.Navigator;
 
 //Page does not include any business logic. Just showing UI and navigating
-public class TransactionPage {
+public class InputTransactionDetailPage {
     public static void showInputTransactionPage() {
         try {
             Account account = InputTransactionDetailReader.readTransactionDetails();

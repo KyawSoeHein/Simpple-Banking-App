@@ -89,32 +89,32 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package org.gic.validation;
 &nbsp;
-&nbsp;import org.gic.model.InterestRules;
+&nbsp;import org.gic.model.InterestRule;
 &nbsp;
 &nbsp;import java.time.LocalDate;
 &nbsp;
 &nbsp;import static org.gic.constants.DateConstants.INTEREST_RULE_DATE_FORMATTER;
 &nbsp;
 <b class="nc">&nbsp;public class InputInterestRuleValidator {</b>
-&nbsp;    private static boolean isDateFormatValid(InterestRules interestRules) {
+&nbsp;    private static boolean isDateFormatValid(InterestRules interestRule) {
 &nbsp;        try {
-<b class="fc">&nbsp;            LocalDate.parse(interestRules.ruleInsertedDate(), INTEREST_RULE_DATE_FORMATTER);</b>
+<b class="fc">&nbsp;            LocalDate.parse(interestRule.ruleInsertedDate(), INTEREST_RULE_DATE_FORMATTER);</b>
 <b class="fc">&nbsp;            return true;</b>
 <b class="fc">&nbsp;        } catch (Exception e) {</b>
 <b class="fc">&nbsp;            return false;</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    private static boolean isInterestRateValid(InterestRules interestRules) {
-<b class="fc">&nbsp;        return interestRules.interestValueInPercent() &gt; 0 &amp;&amp; interestRules.interestValueInPercent() &lt; 100;</b>
+&nbsp;    private static boolean isInterestRateValid(InterestRules interestRule) {
+<b class="fc">&nbsp;        return interestRule.interestValueInPercent() &gt; 0 &amp;&amp; interestRule.interestValueInPercent() &lt; 100;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public static void validate(InterestRules interestRules) throws IllegalArgumentException {
-<b class="fc">&nbsp;        if (!isDateFormatValid(interestRules)) {</b>
+&nbsp;    public static void validate(InterestRules interestRule) throws IllegalArgumentException {
+<b class="fc">&nbsp;        if (!isDateFormatValid(interestRule)) {</b>
 <b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid interest rule date format&quot;);</b>
 &nbsp;        }
 &nbsp;
-<b class="fc">&nbsp;        if (!isInterestRateValid(interestRules)) {</b>
+<b class="fc">&nbsp;        if (!isInterestRateValid(interestRule)) {</b>
 <b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid interest rate&quot;);</b>
 &nbsp;        }
 &nbsp;    }

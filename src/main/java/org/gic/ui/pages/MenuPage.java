@@ -1,19 +1,21 @@
 package org.gic.ui.pages;
 
+import org.gic.constants.MenuConstants;
+import org.gic.constants.MessageConstants;
 import org.gic.enums.NavigationRoutes;
 import org.gic.ui.components.InputOptionReader;
-import org.gic.ui.components.MenuOptions;
 import org.gic.ui.navigator.Navigator;
 
 //Page does not include any business logic. Just showing UI and navigating
 public class MenuPage {
     public static void showMenuPage() {
-        try {
-            MenuOptions.showOptions();
-            NavigationRoutes nextRoute = InputOptionReader.showAndReceiveInput();
-            Navigator.goTo(nextRoute);
-        } catch (Exception e) {
-            System.out.println("MenuPage : Something went wrong " + e.getMessage());
-        }
+        System.out.println(MessageConstants.GREETING_MESSAGE);
+        System.out.println(" [" + MenuConstants.INPUT_TRANSACTION_TYPE + "] " + MenuConstants.INPUT_TRANSACTIONS_MESSAGE);
+        System.out.println(" [" + MenuConstants.DEFINE_INTEREST_RULES_TYPE + "] " + MenuConstants.DEFINE_INTEREST_RULES_MESSAGE);
+        System.out.println(" [" + MenuConstants.PRINT_STATEMENT_TYPE + "] " + MenuConstants.PRINT_STATEMENT_MESSAGE);
+        System.out.println(" [" + MenuConstants.QUIT_TYPE + "] " + MenuConstants.QUIT_MESSAGE);
+
+        NavigationRoutes nextRoute = InputOptionReader.showAndReceiveInput();
+        Navigator.goTo(nextRoute);
     }
 }
