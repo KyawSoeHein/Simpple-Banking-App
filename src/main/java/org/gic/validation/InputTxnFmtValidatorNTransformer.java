@@ -1,6 +1,5 @@
 package org.gic.validation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.gic.enums.TransactionType;
 import org.gic.model.TransactionDetail;
 import org.gic.singleton.TransactionIdGenerator;
@@ -13,7 +12,7 @@ import java.util.regex.Pattern;
 
 import static org.gic.constants.DateConstants.TRANSACTION_DATE_FORMATTER;
 
-public class InputTransactionDetailValidator {
+public class InputTxnFmtValidatorNTransformer {
     private static final String transactionDetailInputCheckRegex = "^(\\S+)\\s(\\S+)\\s(\\S+)\\s(\\S+)$";
     private static final Pattern transactionDetailInputCheckPattern = Pattern.compile(transactionDetailInputCheckRegex);
 
@@ -21,7 +20,7 @@ public class InputTransactionDetailValidator {
         try {
             return LocalDate.parse(transactionDate, TRANSACTION_DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DateTimeParseException("Date needs to be in YYYYMMdd format", transactionDate, 0);
+            throw new DateTimeParseException("Date needs to be in valid range and YYYYMMdd format", transactionDate, 0);
         }
     }
 
@@ -48,7 +47,7 @@ public class InputTransactionDetailValidator {
         }
     }
 
-    public static TransactionDetail transformToTransactionDetail(String input) throws Exception {
+    public static TransactionDetail validateAndTransform(String input) throws Exception {
         Matcher matcher = transactionDetailInputCheckPattern.matcher(input);
         validateInputFormat(matcher);
 

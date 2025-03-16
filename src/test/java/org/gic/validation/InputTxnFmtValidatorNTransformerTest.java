@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InputTransactionDetailValidatorTest {
+class InputTxnFmtValidatorNTransformerTest {
 
     @Test
     void testWithNull() {
@@ -14,7 +14,7 @@ class InputTransactionDetailValidatorTest {
         String input = null;
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -23,7 +23,7 @@ class InputTransactionDetailValidatorTest {
         String input = "";
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -32,7 +32,7 @@ class InputTransactionDetailValidatorTest {
         String input = " ";
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -41,7 +41,7 @@ class InputTransactionDetailValidatorTest {
         String input = "111113333355555 33333";
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -50,7 +50,7 @@ class InputTransactionDetailValidatorTest {
         String input = "11111  33333 55555 33333";
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -59,7 +59,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 D 33.00";
 
         //Act & Assert
-        assertDoesNotThrow(() -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertDoesNotThrow(() -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -68,7 +68,7 @@ class InputTransactionDetailValidatorTest {
         String input = "0251230 33333 YYY 33.000";
 
         //Act & Assert
-        assertThrows(DateTimeParseException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(DateTimeParseException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -77,7 +77,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 D 33.00";
 
         //Act & Assert
-        assertDoesNotThrow(() -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertDoesNotThrow(() -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -86,7 +86,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 Y 33.00";
 
         //Act & Assert
-        assertThrows(Exception.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(Exception.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -95,7 +95,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 Y 33.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -104,7 +104,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 D 33.00";
 
         //Act & Assert
-        assertDoesNotThrow(() -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertDoesNotThrow(() -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
 
@@ -114,7 +114,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 D AAAAA";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -123,7 +123,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 AAA 33.000";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -132,7 +132,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 AAA 00.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -141,7 +141,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 AAA -33.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
     @Test
@@ -150,7 +150,7 @@ class InputTransactionDetailValidatorTest {
         String input = "20251230 33333 AAA 33.00";
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InputTransactionDetailValidator.transformToTransactionDetail(input));
+        assertThrows(IllegalArgumentException.class, () -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
 }

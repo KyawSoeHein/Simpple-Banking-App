@@ -7,12 +7,12 @@ import org.gic.singleton.TextScanner;
 import org.gic.validation.InputOptionValidator;
 
 public class InputOptionReader {
-    private static NavigationRoutes routeToAppropriatePage (String optionType) {
-        return switch (optionType) {
+    private static NavigationRoutes routeToAppropriatePage (String optionType) throws IllegalArgumentException {
+        return switch (optionType.toUpperCase()) {
             case MenuConstants.DEFINE_INTEREST_RULES_TYPE -> NavigationRoutes.GO_TO_DEFINE_INTEREST_RULES_PAGE;
             case MenuConstants.INPUT_TRANSACTION_TYPE -> NavigationRoutes.GO_TO_TRANSACTION_INPUT_PAGE;
             case MenuConstants.PRINT_STATEMENT_TYPE -> NavigationRoutes.GO_TO_ACCOUNT_STATEMENT_PAGE;
-            case MenuConstants.QUIT_MESSAGE -> NavigationRoutes.QUIT;
+            case MenuConstants.QUIT_TYPE -> NavigationRoutes.QUIT;
             default -> throw new IllegalStateException("InputOptionReader : Invalid optionType: " + optionType);
         };
     }
@@ -25,9 +25,10 @@ public class InputOptionReader {
             InputOptionValidator.validate(optionType);
             return routeToAppropriatePage(optionType);
         } catch (BlankInputException blankInputException) {
+            System.out.println();
             return NavigationRoutes.GO_TO_MENU_PAGE;
         } catch (Exception e) {
-            System.out.println("Seems like you input invalid option. Please try again.");
+            System.out.println("Seems like you input invalid option. Please try again. " + e.getMessage());
             System.out.println();
             return NavigationRoutes.GO_TO_MENU_PAGE;
         }

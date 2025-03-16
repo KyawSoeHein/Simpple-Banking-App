@@ -5,6 +5,7 @@ import org.gic.ui.components.InputOptionReader;
 import org.gic.ui.components.MenuOptions;
 import org.gic.ui.navigator.Navigator;
 
+//Page does not include any business logic. Just showing UI and navigating
 public class MenuPage {
     public static void showMenuPage() {
         try {
