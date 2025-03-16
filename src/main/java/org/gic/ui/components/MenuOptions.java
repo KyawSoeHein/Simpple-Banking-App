@@ -1,4 +1,4 @@
-package org.gic.pages.elements;
+package org.gic.ui.components;
 
 import org.gic.constants.MenuConstants;
 import org.gic.constants.MessageConstants;

@@ -1,4 +1,4 @@
-package org.gic.pages.components;
+package org.gic.ui.pages;
 
 public class AccountStatementPage {
     public static void showAccountStatementPage() {

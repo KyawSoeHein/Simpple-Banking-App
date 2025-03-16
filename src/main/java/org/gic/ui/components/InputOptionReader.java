@@ -1,15 +1,12 @@
-package org.gic.pages.elements;
+package org.gic.ui.components;
 
 import org.gic.constants.MenuConstants;
 import org.gic.enums.NavigationRoutes;
 import org.gic.exception.BlankInputException;
+import org.gic.singleton.TextScanner;
 import org.gic.validation.InputOptionValidator;
 
-import java.util.Scanner;
-
 public class InputOptionReader {
-    public static Scanner scanner = new Scanner(System.in);
-
     private static NavigationRoutes routeToAppropriatePage (String optionType) {
         return switch (optionType) {
             case MenuConstants.DEFINE_INTEREST_RULES_TYPE -> NavigationRoutes.GO_TO_DEFINE_INTEREST_RULES_PAGE;
@@ -24,7 +21,7 @@ public class InputOptionReader {
         try {
             System.out.println();
             System.out.print("Enter your option: ");
-            String optionType = scanner.nextLine();
+            String optionType = TextScanner.getScanner().nextLine();
             InputOptionValidator.validate(optionType);
             return routeToAppropriatePage(optionType);
         } catch (BlankInputException blankInputException) {

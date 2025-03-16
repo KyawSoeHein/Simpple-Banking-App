@@ -1,9 +1,9 @@
-package org.gic.pages.components;
+package org.gic.ui.pages;
 
 import org.gic.enums.NavigationRoutes;
-import org.gic.pages.elements.InputOptionReader;
-import org.gic.pages.elements.MenuOptions;
-import org.gic.pages.navigator.Navigator;
+import org.gic.ui.components.InputOptionReader;
+import org.gic.ui.components.MenuOptions;
+import org.gic.ui.navigator.Navigator;
 
 public class MenuPage {
     public static void showMenuPage() {

@@ -1,7 +1,7 @@
 package org.gic;
 
 import org.gic.enums.NavigationRoutes;
-import org.gic.pages.navigator.Navigator;
+import org.gic.ui.navigator.Navigator;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.

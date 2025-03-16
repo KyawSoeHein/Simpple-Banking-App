@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InterestRuleValidatorTest {
+class InputInterestRuleValidatorTest {
 
     @Test
     void testDateFormatWithValid() {
@@ -14,7 +14,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
 
         //Act & Assert
-        assertDoesNotThrow(() -> InterestRuleValidator.validate(interestRules));
+        assertDoesNotThrow(() -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -24,7 +24,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -34,7 +34,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules(date, "0000", 10.0f);
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -44,7 +44,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
 
         //Act & Assert
-        assertDoesNotThrow(() -> InterestRuleValidator.validate(interestRules));
+        assertDoesNotThrow(() -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -54,7 +54,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -64,7 +64,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
     }
 
     @Test
@@ -74,7 +74,7 @@ class InterestRuleValidatorTest {
         InterestRules interestRules = new InterestRules("20250123", "0000", interestRate);
 
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> InterestRuleValidator.validate(interestRules));
+        assertThrows(IllegalArgumentException.class, () -> InputInterestRuleValidator.validate(interestRules));
     }
 
 }

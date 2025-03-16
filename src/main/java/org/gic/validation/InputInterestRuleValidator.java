@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import static org.gic.constants.DateConstants.INTEREST_RULE_DATE_FORMATTER;
 
-public class InterestRuleValidator {
+public class InputInterestRuleValidator {
     private static boolean isDateFormatValid(InterestRules interestRules) {
         try {
             LocalDate.parse(interestRules.ruleInsertedDate(), INTEREST_RULE_DATE_FORMATTER);

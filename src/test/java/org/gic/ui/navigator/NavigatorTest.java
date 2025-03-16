@@ -1,17 +1,15 @@
-package org.gic.pages.navigator;
+package org.gic.ui.navigator;
 
 import org.gic.enums.NavigationRoutes;
-import org.gic.pages.components.AccountStatementPage;
-import org.gic.pages.components.DefineInterestRulePage;
-import org.gic.pages.components.InputTransactionPage;
-import org.gic.pages.components.MenuPage;
+import org.gic.ui.pages.AccountStatementPage;
+import org.gic.ui.pages.DefineInterestRulePage;
+import org.gic.ui.pages.TransactionPage;
+import org.gic.ui.pages.MenuPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 //this test will perform better if I used dependency injection for navigator.
 //but I don't see it as better option than using static
@@ -19,14 +17,14 @@ class NavigatorTest {
 
     private MockedStatic<MenuPage> menuMock;
     private MockedStatic<DefineInterestRulePage> defineInterestRulePageMock;
-    private MockedStatic<InputTransactionPage> inputTransactionPageMock;
+    private MockedStatic<TransactionPage> inputTransactionPageMock;
     private MockedStatic<AccountStatementPage> accountStatementPageMockedStatic;
 
     @BeforeEach
     void setUp() {
         menuMock = Mockito.mockStatic(MenuPage.class);
         defineInterestRulePageMock = Mockito.mockStatic(DefineInterestRulePage.class);
-        inputTransactionPageMock = Mockito.mockStatic(InputTransactionPage.class);
+        inputTransactionPageMock = Mockito.mockStatic(TransactionPage.class);
         accountStatementPageMockedStatic = Mockito.mockStatic(AccountStatementPage.class);
     }
 
@@ -68,7 +66,7 @@ class NavigatorTest {
     @Test
     void testNavigatorWithInputTransactionPage() {
         Navigator.goTo(NavigationRoutes.GO_TO_TRANSACTION_INPUT_PAGE);
-        inputTransactionPageMock.verify(InputTransactionPage::showInputTransactionPage);
+        inputTransactionPageMock.verify(TransactionPage::showInputTransactionPage);
         menuMock.verifyNoInteractions();
         defineInterestRulePageMock.verifyNoInteractions();
         accountStatementPageMockedStatic.verifyNoInteractions();

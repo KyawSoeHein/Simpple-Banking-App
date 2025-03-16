@@ -1,4 +1,4 @@
-package org.gic.pages.elements;
+package org.gic.ui.components;
 
 import org.gic.enums.NavigationRoutes;
 import org.junit.jupiter.api.Test;

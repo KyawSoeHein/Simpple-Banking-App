@@ -16,7 +16,7 @@ public enum TransactionType {
         return code;
     }
 
-    public TransactionType fromCode(char code) throws IllegalArgumentException {
+    public static TransactionType fromCode(char code) throws IllegalArgumentException {
         for (TransactionType transactionType : TransactionType.values()) {
             if (transactionType.getCode() == code) {
                 return transactionType;

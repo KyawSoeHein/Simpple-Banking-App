@@ -1,4 +1,4 @@
-package org.gic.pages.components;
+package org.gic.ui.pages;
 
 public class DefineInterestRulePage {
     public static void showDefineInterestRulePage() {
