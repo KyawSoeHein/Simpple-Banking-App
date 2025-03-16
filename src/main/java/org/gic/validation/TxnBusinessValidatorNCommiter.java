@@ -20,6 +20,7 @@ public class TxnBusinessValidatorNCommiter {
                 willAccountBalanceBecomeLowerThanZero(transactionDetail.amount(), account.getBalance());
                 account.subtractFromBalance(transactionDetail.amount());
             }
+            case INTEREST_EARNED -> throw new IllegalArgumentException("You are not allowed to generate interest");
             case null -> throw new IllegalArgumentException("Null transactionType, why does it happen?");
             default -> throw new IllegalArgumentException("Invalid transactionType");
         }

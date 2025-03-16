@@ -9,19 +9,18 @@ public enum TransactionType {
     WITHDRAWAL(TransactionTypeConstants.TRANSACTION_TYPE_WITHDRAW),
     INTEREST_EARNED(TransactionTypeConstants.TRANSACTION_TYPE_INTEREST);
 
-    private final char code;
-    TransactionType(char code) {
+    private final String code;
+    TransactionType(String code) {
         this.code = code;
     }
 
-    public static TransactionType fromCode(char code) throws IllegalArgumentException {
+    public static TransactionType fromCode(String code) throws IllegalArgumentException {
         for (TransactionType transactionType : TransactionType.values()) {
-            if (transactionType.getCode() == code) {
+            if (transactionType.getCode().equalsIgnoreCase(code)) {
                 return transactionType;
             }
         }
 
-        throw new IllegalArgumentException(
-                String.format("No enum constant %s.%s", TransactionType.class.getCanonicalName(), code));
+        throw new IllegalArgumentException("You added invalid transactionType indicator. Please add either D or W (case insensitive). Current value: " + code);
     }
 }

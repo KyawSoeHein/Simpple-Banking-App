@@ -34,7 +34,7 @@ public class InputTxnFmtValidatorNTransformer {
     }
 
     private static TransactionType isValidTransactionType(String transactionType) throws IllegalArgumentException {
-        return TransactionType.fromCode(transactionType.charAt(0));
+        return TransactionType.fromCode(transactionType);
     }
 
     private static String generateRandomTransactionId(String transactionDate) {

@@ -107,6 +107,15 @@ class InputTxnFmtValidatorNTransformerTest {
         assertDoesNotThrow(() -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
     }
 
+    @Test
+    void testWithValidTransactionTypeWithLowerLetter() {
+        //Arrange
+        String input = "20251230 33333 d 33.00";
+
+        //Act & Assert
+        assertDoesNotThrow(() -> InputTxnFmtValidatorNTransformer.validateAndTransform(input));
+    }
+
 
     @Test
     void testWithInValidAmountAndBigDecimalConversionFailed() {
