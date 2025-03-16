@@ -1,6 +1,7 @@
 package org.gic.ui.pages;
 
 import org.gic.enums.NavigationRoutes;
+import org.gic.model.Account;
 import org.gic.ui.components.InputTransactionDetailReader;
 import org.gic.ui.navigator.Navigator;
 
@@ -8,8 +9,8 @@ import org.gic.ui.navigator.Navigator;
 public class TransactionPage {
     public static void showInputTransactionPage() {
         try {
-            InputTransactionDetailReader.readTransactionDetails();
-            Navigator.goTo(NavigationRoutes.GO_TO_ACCOUNT_STATEMENT_PAGE);
+            Account account = InputTransactionDetailReader.readTransactionDetails();
+            Navigator.goTo(NavigationRoutes.GO_TO_ACCOUNT_STATEMENT_PAGE, account);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println();

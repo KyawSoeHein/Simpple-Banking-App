@@ -42,12 +42,14 @@ public class TxnBusinessValidatorNCommiter {
         return account;
     }
 
-    public static void commitTransaction(TransactionDetail transactionDetail) throws IllegalArgumentException {
+    public static Account commitTransaction(TransactionDetail transactionDetail) throws IllegalArgumentException {
         if (transactionDetail == null) {
             throw new IllegalArgumentException("Transaction cannot be null");
         }
 
         Account account = getOrCreateAccount(transactionDetail.accountNumber());
         commit(account, transactionDetail);
+
+        return account;
     }
 }
