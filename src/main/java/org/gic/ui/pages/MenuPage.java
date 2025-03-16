@@ -2,7 +2,7 @@ package org.gic.ui.pages;
 
 import org.gic.constants.MenuConstants;
 import org.gic.enums.NavigationRoutes;
-import org.gic.ui.components.InputOptionReader;
+import org.gic.ui.inputReader.InputOptionReader;
 import org.gic.ui.navigator.Navigator;
 
 //Page does not include any business logic. Just showing UI and navigating

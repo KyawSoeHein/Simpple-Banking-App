@@ -1,4 +1,4 @@
-package org.gic.ui.components;
+package org.gic.ui.inputReader;
 
 import org.gic.constants.MenuConstants;
 import org.gic.enums.NavigationRoutes;

@@ -1,7 +1,9 @@
 package org.gic.enums;
 
+import lombok.Getter;
 import org.gic.constants.TransactionTypeConstants;
 
+@Getter
 public enum TransactionType {
     DEPOSIT(TransactionTypeConstants.TRANSACTION_TYPE_DEPOSIT),
     WITHDRAWAL(TransactionTypeConstants.TRANSACTION_TYPE_WITHDRAW),
@@ -10,10 +12,6 @@ public enum TransactionType {
     private final char code;
     TransactionType(char code) {
         this.code = code;
-    }
-
-    public char getCode() {
-        return code;
     }
 
     public static TransactionType fromCode(char code) throws IllegalArgumentException {

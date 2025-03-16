@@ -1,6 +1,5 @@
-package org.gic.ui.components;
+package org.gic.ui.inputReader;
 
-import org.gic.enums.NavigationRoutes;
 import org.gic.model.Account;
 import org.gic.singleton.AccountStorage;
 import org.gic.singleton.TextScanner;

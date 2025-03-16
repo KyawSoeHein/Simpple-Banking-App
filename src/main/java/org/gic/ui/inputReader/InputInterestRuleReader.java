@@ -1,4 +1,4 @@
-package org.gic.ui.components;
+package org.gic.ui.inputReader;
 
 import org.gic.model.InterestRule;
 import org.gic.singleton.InterestRuleStorage;

@@ -2,7 +2,7 @@ package org.gic.ui.pages;
 
 import org.gic.enums.NavigationRoutes;
 import org.gic.model.Account;
-import org.gic.ui.components.InputAccountNumberReader;
+import org.gic.ui.inputReader.InputAccountNumberReader;
 import org.gic.ui.navigator.Navigator;
 
 //Page does not include any business logic. Just showing UI and navigating
