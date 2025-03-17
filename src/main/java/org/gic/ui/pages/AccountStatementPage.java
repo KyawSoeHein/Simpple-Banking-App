@@ -16,11 +16,11 @@ public class AccountStatementPage {
         System.out.println();
         System.out.println("Account: " + account.getAccountNumber());
         System.out.println("Your current balance: " + account.getBalance());
-        System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", "Date", "Txn Id", "Type", "Amount");
+        System.out.printf("| %-10s | %-12s | %-20s | %-7s |\n", "Date", "Txn Id", "Type", "Amount");
 
         account.getAccountStatementList().forEach((transactionDate, transactionDetailList) -> {
             transactionDetailList.forEach(value -> {
-                System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", transactionDate, value.transactionId(), value.transactionType(), value.amount());
+                System.out.printf("| %-10s | %-12s | %-20s | %-7s |\n", transactionDate, value.transactionId(), value.transactionType(), value.amount());
             });
         });
 

@@ -17,12 +17,11 @@ public class TxnBusinessValidatorNCommiter {
 
     private static void commit(Account account, TransactionDetail transactionDetail) throws IllegalArgumentException {
         switch (transactionDetail.transactionType()) {
-            case DEPOSIT -> account.addToBalance(transactionDetail.amount());
+            case DEPOSIT, INTEREST_EARNED -> account.addToBalance(transactionDetail.amount());
             case WITHDRAWAL -> {
                 willAccountBalanceBecomeLowerThanZero(transactionDetail.amount(), account.getBalance());
                 account.subtractFromBalance(transactionDetail.amount());
             }
-            case INTEREST_EARNED -> throw new IllegalArgumentException("You are not allowed to generate interest");
             case null -> throw new IllegalArgumentException("Null transactionType, why does it happen?");
             default -> throw new IllegalArgumentException("Invalid transactionType");
         }

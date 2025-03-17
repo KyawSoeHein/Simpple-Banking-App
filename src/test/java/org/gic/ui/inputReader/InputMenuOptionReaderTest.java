@@ -10,7 +10,7 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class InputOptionReaderTest {
+class InputMenuOptionReaderTest {
     @Test
     void testWithInValidInput(){
         try (MockedStatic<TextScanner> mockedTextScanner = mockStatic(TextScanner.class)) {
@@ -20,7 +20,7 @@ class InputOptionReaderTest {
             mockedTextScanner.when(TextScanner::getScanner).thenReturn(scannerMock);
 
             // Act
-            NavigationRoutes result = InputOptionReader.showAndReceiveInput();
+            NavigationRoutes result = InputMenuOptionReader.showAndReceiveInput();
 
             // Assert
             assertEquals(NavigationRoutes.GO_TO_MENU_PAGE, result);
@@ -36,7 +36,7 @@ class InputOptionReaderTest {
             mockedTextScanner.when(TextScanner::getScanner).thenReturn(scannerMock);
 
             // Act
-            NavigationRoutes result = InputOptionReader.showAndReceiveInput();
+            NavigationRoutes result = InputMenuOptionReader.showAndReceiveInput();
 
             // Assert
             assertEquals(NavigationRoutes.GO_TO_MENU_PAGE, result);
@@ -52,7 +52,7 @@ class InputOptionReaderTest {
             mockedTextScanner.when(TextScanner::getScanner).thenReturn(scannerMock);
 
             // Act
-            NavigationRoutes result = InputOptionReader.showAndReceiveInput();
+            NavigationRoutes result = InputMenuOptionReader.showAndReceiveInput();
 
             // Assert
             assertEquals(NavigationRoutes.GO_TO_MENU_PAGE, result);
@@ -68,7 +68,7 @@ class InputOptionReaderTest {
             mockedTextScanner.when(TextScanner::getScanner).thenReturn(scannerMock);
 
             // Act
-            NavigationRoutes result = InputOptionReader.showAndReceiveInput();
+            NavigationRoutes result = InputMenuOptionReader.showAndReceiveInput();
 
             // Assert
             assertEquals(NavigationRoutes.GO_TO_TRANSACTION_INPUT_PAGE, result);
@@ -84,7 +84,7 @@ class InputOptionReaderTest {
             mockedTextScanner.when(TextScanner::getScanner).thenReturn(scannerMock);
 
             // Act
-            NavigationRoutes result = InputOptionReader.showAndReceiveInput();
+            NavigationRoutes result = InputMenuOptionReader.showAndReceiveInput();
 
             // Assert
             assertEquals(NavigationRoutes.GO_TO_DEFINE_INTEREST_RULES_PAGE, result);

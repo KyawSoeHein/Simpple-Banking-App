@@ -9,6 +9,7 @@ public class InputOptionValidator {
     public static void validate(String input) throws Exception {
         Set<String> VALID_INPUTS = Set.of(
                 MenuConstants.QUIT_TYPE,
+                MenuConstants.CALCULATE_INTEREST_TYPE,
                 MenuConstants.DEFINE_INTEREST_RULES_TYPE,
                 MenuConstants.PRINT_STATEMENT_TYPE,
                 MenuConstants.INPUT_TRANSACTION_TYPE

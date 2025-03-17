@@ -9,4 +9,6 @@ public class MenuConstants {
     public static final String PRINT_STATEMENT_MESSAGE = "Print statement";
     public static final String QUIT_TYPE = "Q";
     public static final String QUIT_MESSAGE = "Quit";
+    public static final String CALCULATE_INTEREST_TYPE = "C";
+    public static final String CALCULATE_INTEREST_MESSAGE = "Calculate interest";
 }
