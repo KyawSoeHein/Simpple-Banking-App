@@ -2,7 +2,6 @@ package org.gic.ui.pages;
 
 import org.gic.enums.NavigationRoutes;
 import org.gic.model.Account;
-import org.gic.model.TransactionDetail;
 import org.gic.ui.navigator.Navigator;
 
 //Page does not include any business logic. Just showing UI and navigating
@@ -19,8 +18,10 @@ public class AccountStatementPage {
         System.out.println("Your current balance: " + account.getBalance());
         System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", "Date", "Txn Id", "Type", "Amount");
 
-        account.getAccountStatementList().forEach((key, value) -> {
-            System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", key, value.transactionId(), value.transactionType(), value.amount());
+        account.getAccountStatementList().forEach((transactionDate, transactionDetailList) -> {
+            transactionDetailList.forEach(value -> {
+                System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", transactionDate, value.transactionId(), value.transactionType(), value.amount());
+            });
         });
 
         System.out.println();

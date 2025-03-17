@@ -107,11 +107,11 @@ class TxnBusinessValidatorNCommiterTest {
     }
 
     @Test
-    void testLowerThanZeroExceptionThrownForOldTransactionWithdrawl() {
+    void testLowerThanZeroExceptionThrownForOldTransactionWithdrawal() {
         //Arrange
         TransactionDetail firstDeposit = new TransactionDetail(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
         TransactionDetail secondDeposit = new TransactionDetail(LocalDate.parse("20251231", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
-        TransactionDetail oldWithdrawl = new TransactionDetail(LocalDate.parse("20251120", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.WITHDRAWAL, new BigDecimal("300.00"), "1111-11", 'W');
+        TransactionDetail oldWithdrawal = new TransactionDetail(LocalDate.parse("20251120", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.WITHDRAWAL, new BigDecimal("300.00"), "1111-11", 'W');
 
         //Act
         TxnBusinessValidatorNCommiter.commitTransaction(firstDeposit);
@@ -119,6 +119,22 @@ class TxnBusinessValidatorNCommiterTest {
 
         //Act & Assert
         assertEquals(2, AccountStorage.getAccountStorage().get("12345").getAccountStatementList().size());
-        assertThrows(IllegalArgumentException.class, ()-> TxnBusinessValidatorNCommiter.commitTransaction(oldWithdrawl));
+        assertThrows(IllegalArgumentException.class, ()-> TxnBusinessValidatorNCommiter.commitTransaction(oldWithdrawal));
+    }
+
+    @Test
+    void testMultipleTransactionsWithSameDateAreStored() {
+        //Arrange
+        TransactionDetail firstDeposit = new TransactionDetail(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
+        TransactionDetail secondDeposit = new TransactionDetail(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-12", 'D');
+        TransactionDetail firstWithdrawal = new TransactionDetail(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.WITHDRAWAL, new BigDecimal("100.00"), "1111-13", 'W');
+
+        //Act
+        TxnBusinessValidatorNCommiter.commitTransaction(firstDeposit);
+        TxnBusinessValidatorNCommiter.commitTransaction(secondDeposit);
+
+        //Act & Assert
+        assertDoesNotThrow(()-> TxnBusinessValidatorNCommiter.commitTransaction(firstWithdrawal));
+        assertEquals(3, AccountStorage.getAccountStorage().get("12345").getAccountStatementList().get(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER)).size());
     }
 }

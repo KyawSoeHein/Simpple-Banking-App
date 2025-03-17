@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -15,7 +14,7 @@ import java.util.TreeMap;
 public class Account {
     private String accountNumber;
     private BigDecimal balance;
-    private TreeMap<LocalDate, TransactionDetail> accountStatementList;
+    private TreeMap<LocalDate, List<TransactionDetail>> accountStatementList;
 
     public void addToBalance(BigDecimal balanceToAdd) {
         this.balance = this.balance.add(balanceToAdd);

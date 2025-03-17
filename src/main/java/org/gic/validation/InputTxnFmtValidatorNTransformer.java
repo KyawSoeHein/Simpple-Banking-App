@@ -37,8 +37,10 @@ public class InputTxnFmtValidatorNTransformer {
         return TransactionType.fromCode(transactionType);
     }
 
-    private static String generateRandomTransactionId(String transactionDate) {
-        return transactionDate + "-" +TransactionIdGenerator.getNextTransactionId();
+    private static String generateRandomTransactionId(String transactionDate, TransactionType transactionType) {
+        return transactionType.equals(TransactionType.WITHDRAWAL)
+                ? transactionDate + "-" +TransactionIdGenerator.getNextWithdrawTransactionId()
+                : transactionDate + "-" +TransactionIdGenerator.getNextDepositTransactionId();
     }
 
     private static void validateInputFormat(Matcher matcher) throws Exception {
@@ -52,10 +54,10 @@ public class InputTxnFmtValidatorNTransformer {
         validateInputFormat(matcher);
 
         LocalDate transactionDate = isDateFormatValid(matcher.group(1));
-        String transactionId = generateRandomTransactionId(matcher.group(1));
         String accountNumber = matcher.group(2);
         char shortTransactionType = matcher.group(3).charAt(0);
         TransactionType transactionType = isValidTransactionType(matcher.group(3));
+        String transactionId = generateRandomTransactionId(matcher.group(1), transactionType);
         BigDecimal amount = isAmountValid(matcher.group(4));
 
         return new TransactionDetail(transactionDate, accountNumber, transactionType, amount, transactionId, shortTransactionType);

@@ -5,6 +5,8 @@ import org.gic.model.TransactionDetail;
 import org.gic.singleton.AccountStorage;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TxnBusinessValidatorNCommiter {
     private static void willAccountBalanceBecomeLowerThanZero(BigDecimal amountToDebit, BigDecimal accountBalance) throws IllegalArgumentException {
@@ -25,7 +27,12 @@ public class TxnBusinessValidatorNCommiter {
             default -> throw new IllegalArgumentException("Invalid transactionType");
         }
 
-        account.getAccountStatementList().put(transactionDetail.transactionDate(), transactionDetail);
+        List<TransactionDetail> transactionDetailList = account.getAccountStatementList().get(transactionDetail.transactionDate());
+        if (transactionDetailList == null) {
+            transactionDetailList = new ArrayList<>();
+        }
+        transactionDetailList.add(transactionDetail);
+        account.getAccountStatementList().put(transactionDetail.transactionDate(), transactionDetailList);
         AccountStorage.getAccountStorage().put(account.getAccountNumber(), account);
     }
 
