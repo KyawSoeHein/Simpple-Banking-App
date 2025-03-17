@@ -8,6 +8,11 @@ To run this project, follow these steps:
 3. Open the project in **IntelliJ IDEA**.
 4. Run the project using IntelliJ's **Run** configuration.
 
+### if you don't have intelliJ
+1. Go to project directory.
+2. Run ./gradlew build
+3. java -jar build/libs/SimpleBankApp-1.0-SNAPSHOT.jar
+
 ## Notes from the Developer
 ### Design Decisions
 - For this project, I decided to use **static methods and variables** instead of **dependency injection**.
@@ -29,6 +34,7 @@ Since the interest calculation method was not clearly specified, I followed my o
     - The **smaller** of these two values is used in the interest formula.
     - If either of the two values is **0**, the **non-zero value** is used.
 4. The final interest is calculated based on these values.
+5. I might could have better test and write better test cases for this interest calculation if I have more time but for now, this is it.
 
 ## License
 This project is open-source and free to use. Contributions are welcome!
