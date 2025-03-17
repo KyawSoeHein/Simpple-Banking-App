@@ -3,6 +3,7 @@ package org.gic.singleton;
 import org.gic.model.Account;
 import org.gic.model.InterestRule;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -29,6 +30,7 @@ public class InterestRuleStorage {
             return;
         }
 
-        
+//        BigDecimal totalInterest = BigDecimal.ZERO;
+//        for (transactionDetail: account.getAccountStatementList())
     }
 }

@@ -31,9 +31,15 @@ public class TxnBusinessValidatorNCommiter {
         if (transactionDetailList == null) {
             transactionDetailList = new ArrayList<>();
         }
-        transactionDetailList.add(transactionDetail);
+        transactionDetailList.add(updateBalanceAfterTransactionValue(account.getBalance(), transactionDetail));
         account.getAccountStatementList().put(transactionDetail.transactionDate(), transactionDetailList);
         AccountStorage.getAccountStorage().put(account.getAccountNumber(), account);
+    }
+
+    private static TransactionDetail updateBalanceAfterTransactionValue(BigDecimal accountFinalBalance, TransactionDetail transactionDetail) {
+        return new TransactionDetail(transactionDetail.transactionDate(),
+                transactionDetail.accountNumber(), transactionDetail.transactionType(),
+                transactionDetail.amount(), transactionDetail.transactionId(), transactionDetail.shortTransactionType(), accountFinalBalance);
     }
 
     private static Account addAccount(Account account) throws RuntimeException {

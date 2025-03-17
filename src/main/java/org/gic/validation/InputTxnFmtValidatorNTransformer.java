@@ -60,6 +60,6 @@ public class InputTxnFmtValidatorNTransformer {
         String transactionId = generateRandomTransactionId(matcher.group(1), transactionType);
         BigDecimal amount = isAmountValid(matcher.group(4));
 
-        return new TransactionDetail(transactionDate, accountNumber, transactionType, amount, transactionId, shortTransactionType);
+        return new TransactionDetail(transactionDate, accountNumber, transactionType, amount, transactionId, shortTransactionType, BigDecimal.ZERO);
     }
 }
