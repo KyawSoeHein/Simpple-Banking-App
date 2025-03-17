@@ -10,6 +10,7 @@ import org.mockito.MockedStatic;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -64,7 +65,7 @@ class InputAccountNumberReaderTest {
     void testAccountExist() throws Exception {
         try (MockedStatic<TextScanner> mockedTextScanner = mockStatic(TextScanner.class)) {
             // Arrange
-            Account account = new Account("1111", new BigDecimal("0"), new ArrayList<>(), new ArrayList<>());
+            Account account = new Account("1111", new BigDecimal("0"), new TreeMap<>());
             AccountStorage.getAccountStorage().put(account.getAccountNumber(), account);
             Scanner scannerMock = mock(Scanner.class);
             when(scannerMock.nextLine()).thenReturn("1111");

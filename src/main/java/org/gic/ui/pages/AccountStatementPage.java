@@ -19,9 +19,9 @@ public class AccountStatementPage {
         System.out.println("Your current balance: " + account.getBalance());
         System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", "Date", "Txn Id", "Type", "Amount");
 
-        for (TransactionDetail detail: account.getAccountStatementList()) {
-            System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", detail.transactionDate(), detail.transactionId(), detail.transactionType(), detail.amount());
-        }
+        account.getAccountStatementList().forEach((key, value) -> {
+            System.out.printf("| %-10s | %-12s | %-10s | %-7s |\n", key, value.transactionId(), value.transactionType(), value.amount());
+        });
 
         System.out.println();
         Navigator.goTo(NavigationRoutes.GO_TO_MENU_PAGE);

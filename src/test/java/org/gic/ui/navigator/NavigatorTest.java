@@ -83,7 +83,7 @@ class NavigatorTest {
 
     @Test
     void testNavigatorWithAccountStatementPageWithAccount() {
-        Account account = new Account("", new BigDecimal("0.00"), null, null);
+        Account account = new Account("", new BigDecimal("0.00"), null);
 
         Navigator.goTo(NavigationRoutes.GO_TO_ACCOUNT_STATEMENT_PAGE, account);
         accountStatementPageMockedStatic.verify(() -> AccountStatementPage.showAccountStatementPage(account));

@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,7 +57,7 @@ class TxnBusinessValidatorNCommiterTest {
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
         accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
-        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new ArrayList<>(), new ArrayList<>()));
+        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
         //Act & Assert
         assertDoesNotThrow(()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));
@@ -70,7 +70,7 @@ class TxnBusinessValidatorNCommiterTest {
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.WITHDRAWAL, new BigDecimal("100.00"), "1111-11", 'W');
         accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
-        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new ArrayList<>(), new ArrayList<>()));
+        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new TreeMap<>()));
 
         //Act & Assert
         assertThrows(IllegalArgumentException.class, ()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));
@@ -84,7 +84,7 @@ class TxnBusinessValidatorNCommiterTest {
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.DEPOSIT, new BigDecimal("50.00"), "1111-11", 'D');
         accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
-        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new ArrayList<>(), new ArrayList<>()));
+        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
         //Act & Assert
         assertDoesNotThrow(()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));
@@ -98,7 +98,7 @@ class TxnBusinessValidatorNCommiterTest {
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.WITHDRAWAL, new BigDecimal("100.00"), "1111-11", 'W');
         accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
-        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new ArrayList<>(), new ArrayList<>()));
+        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
         //Act & Assert
         assertDoesNotThrow(()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));
@@ -112,7 +112,7 @@ class TxnBusinessValidatorNCommiterTest {
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", null, new BigDecimal("100.00"), "1111-11", 'W');
         accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
-        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new ArrayList<>(), new ArrayList<>()));
+        accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new TreeMap<>()));
 
         //Act & Assert
         assertThrows(IllegalArgumentException.class, ()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));

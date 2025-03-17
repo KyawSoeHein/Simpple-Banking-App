@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +13,7 @@ class AccountTest {
     @Test
     void addToBalance() {
         //Arrange
-        Account account = new Account("11111", new BigDecimal("100"), new ArrayList<>(), new ArrayList<>());
+        Account account = new Account("11111", new BigDecimal("100"), new TreeMap<>());
 
         //Act
         account.addToBalance(new BigDecimal("100"));
@@ -24,7 +25,7 @@ class AccountTest {
     @Test
     void subtractFromBalance() {
         //Arrange
-        Account account = new Account("11111", new BigDecimal("100"), new ArrayList<>(), new ArrayList<>());
+        Account account = new Account("11111", new BigDecimal("100"), new TreeMap<>());
 
         //Act
         account.subtractFromBalance(new BigDecimal("100"));

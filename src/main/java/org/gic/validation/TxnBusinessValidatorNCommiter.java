@@ -25,7 +25,7 @@ public class TxnBusinessValidatorNCommiter {
             default -> throw new IllegalArgumentException("Invalid transactionType");
         }
 
-        account.getAccountStatementList().add(transactionDetail);
+        account.getAccountStatementList().put(transactionDetail.transactionDate(), transactionDetail);
         AccountStorage.getAccountStorage().put(account.getAccountNumber(), account);
     }
 
