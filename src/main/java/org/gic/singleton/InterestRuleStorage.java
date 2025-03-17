@@ -1,5 +1,6 @@
 package org.gic.singleton;
 
+import org.gic.model.Account;
 import org.gic.model.InterestRule;
 
 import java.time.LocalDate;
@@ -20,5 +21,14 @@ public class InterestRuleStorage {
 
         interestRules.put(newInterestRule.ruleId(), newInterestRule);
         ruleDates.put(newInterestRule.ruleInsertedDate(), newInterestRule.ruleId());
+    }
+
+    public static void calculateInterest(Account account) throws IllegalArgumentException {
+        if (account.getAccountStatementList().isEmpty()) {
+            System.out.println("There is no transaction to calculate interest for " + account.getAccountNumber());
+            return;
+        }
+
+        
     }
 }

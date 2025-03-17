@@ -1,14 +1,12 @@
 package org.gic.validation;
 
+import org.gic.constants.DateConstants;
 import org.gic.enums.TransactionType;
 import org.gic.model.Account;
 import org.gic.model.TransactionDetail;
 import org.gic.singleton.AccountStorage;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,16 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TxnBusinessValidatorNCommiterTest {
 
-    private MockedStatic<AccountStorage> accountStorageMockedStatic;
-
     @BeforeEach
     void setUp() {
-        accountStorageMockedStatic = Mockito.mockStatic(AccountStorage.class);
-    }
-
-    @AfterEach
-    void tearDown() {
-        accountStorageMockedStatic.close();
+        AccountStorage.getAccountStorage().clear();
     }
 
     @Test
@@ -44,7 +35,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testAccountDoesNotExist() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
 
         //Act & Assert
         assertDoesNotThrow(()-> TxnBusinessValidatorNCommiter.commitTransaction(transactionDetail));
@@ -55,7 +45,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testAccountExists() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
         accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
@@ -68,7 +57,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testAccountWillGoLowerThanZero() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.WITHDRAWAL, new BigDecimal("100.00"), "1111-11", 'W');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
         accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new TreeMap<>()));
 
@@ -82,7 +70,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testTransactionWillCommit() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.DEPOSIT, new BigDecimal("50.00"), "1111-11", 'D');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
         accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
@@ -96,7 +83,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testTransactionWillCommitIfBalanceBecomesZero() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", TransactionType.WITHDRAWAL, new BigDecimal("100.00"), "1111-11", 'W');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
         accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("100.00"), new TreeMap<>()));
 
@@ -110,7 +96,6 @@ class TxnBusinessValidatorNCommiterTest {
     void testAccountStatementIsNotUpdatedIfInvalidTypeIsPassed() {
         //Arrange
         TransactionDetail transactionDetail = new TransactionDetail(LocalDate.now(), "1111", null, new BigDecimal("100.00"), "1111-11", 'W');
-        accountStorageMockedStatic.when(AccountStorage::getAccountStorage).thenReturn(new HashMap<>());
         HashMap<String, Account> accountHashMap = AccountStorage.getAccountStorage();
         accountHashMap.put(transactionDetail.accountNumber(), new Account("1111", new BigDecimal("00.00"), new TreeMap<>()));
 
@@ -119,5 +104,21 @@ class TxnBusinessValidatorNCommiterTest {
         assertEquals(1, AccountStorage.getAccountStorage().size());
         assertEquals(new BigDecimal("00.00"), accountHashMap.get(transactionDetail.accountNumber()).getBalance());
         assertEquals(0, AccountStorage.getAccountStorage().get("1111").getAccountStatementList().size());
+    }
+
+    @Test
+    void testLowerThanZeroExceptionThrownForOldTransactionWithdrawl() {
+        //Arrange
+        TransactionDetail firstDeposit = new TransactionDetail(LocalDate.parse("20251230", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
+        TransactionDetail secondDeposit = new TransactionDetail(LocalDate.parse("20251231", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D');
+        TransactionDetail oldWithdrawl = new TransactionDetail(LocalDate.parse("20251120", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.WITHDRAWAL, new BigDecimal("300.00"), "1111-11", 'W');
+
+        //Act
+        TxnBusinessValidatorNCommiter.commitTransaction(firstDeposit);
+        TxnBusinessValidatorNCommiter.commitTransaction(secondDeposit);
+
+        //Act & Assert
+        assertEquals(2, AccountStorage.getAccountStorage().get("12345").getAccountStatementList().size());
+        assertThrows(IllegalArgumentException.class, ()-> TxnBusinessValidatorNCommiter.commitTransaction(oldWithdrawl));
     }
 }
