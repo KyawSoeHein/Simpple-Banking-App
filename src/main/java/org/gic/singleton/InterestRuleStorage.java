@@ -33,17 +33,17 @@ public class InterestRuleStorage {
 
     private static InterestRule getEffectiveInterestRule(LocalDate transactionDate) {
         for (LocalDate date: ruleDates.keySet()) {
-            if (date.isBefore(transactionDate)) {
+            if (date.isBefore(transactionDate) || date.equals(transactionDate)) {
                 return interestRules.get(ruleDates.get(date));
             }
         }
 
         //it is so sad that people don't get interest because there is no rule defined. Everyone gets 1% by default
-        return new InterestRule(LocalDate.now(), "default-rule", 1.0f);
+        return new InterestRule(LocalDate.now(), "default-rule", 0f);
     }
 
     private static long getDaysBetweenCurrentRuleAndNextRule(InterestRule interestRule) {
-        Map<LocalDate, String> nextRuleList = ruleDates.tailMap(interestRule.ruleInsertedDate(), false);
+        Map<LocalDate, String> nextRuleList = ruleDates.tailMap(interestRule.ruleInsertedDate(), true);
 
         if (nextRuleList.isEmpty()) {
             return 0;
@@ -53,7 +53,11 @@ public class InterestRuleStorage {
     }
 
     private static long getDaysBetweenCurrentTransactionAndNextTransaction(TreeMap<LocalDate, List<TransactionDetail>> accountStatementList, TransactionDetail currentTransaction) {
-        Map<LocalDate, List<TransactionDetail>> nextTransactionList = accountStatementList.tailMap(currentTransaction.transactionDate(), false);
+        if (accountStatementList.size() == 1 && accountStatementList.firstEntry().getValue().size() == 1) {
+            return ChronoUnit.DAYS.between(currentTransaction.transactionDate(), LocalDate.now());
+        }
+
+        Map<LocalDate, List<TransactionDetail>> nextTransactionList = accountStatementList.tailMap(currentTransaction.transactionDate(), true);
 
         if (nextTransactionList.isEmpty()) {
             return 0;

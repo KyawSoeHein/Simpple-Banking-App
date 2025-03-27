@@ -99,4 +99,25 @@ class InterestRuleStorageTest {
         assertEquals(1, AccountStorage.getAccountStorage().get("12345").getAccountStatementList().get(LocalDate.now()).size());
     }
 
+    @Test
+    void testCalculateInterestForFirstTransaction() {
+        //Arrange
+        InterestRule interestRule = new InterestRule(LocalDate.parse("20251130", DateConstants.INTEREST_RULE_DATE_FORMATTER), "Rule-01", 10.00f);
+        TransactionDetail firstDeposit = new TransactionDetail(LocalDate.parse("20251030", DateConstants.TRANSACTION_DATE_FORMATTER), "12345", TransactionType.DEPOSIT, new BigDecimal("100.00"), "1111-11", 'D', BigDecimal.ZERO);
+
+        //Act
+        InterestRuleStorage.addRule(interestRule);
+        TxnBusinessValidatorNCommiter.commitTransaction(firstDeposit);
+        InterestRuleStorage.creditInterestToAllAccount();
+
+        //Assert
+        AccountStorage.getAccountStorage()
+                .get("12345")
+                .getAccountStatementList()
+                .get(LocalDate.parse("20251030", DateConstants.TRANSACTION_DATE_FORMATTER))
+                .stream()
+                .filter(transactionDetail -> transactionDetail.transactionType() == TransactionType.INTEREST_EARNED)
+                .findFirst().ifPresent(interestedTransDetail -> assertTrue(interestedTransDetail.amount().compareTo(BigDecimal.ZERO) > 0, "Amount should be greater than 0"));
+
+    }
 }
